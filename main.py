@@ -98,7 +98,7 @@ class Gupiao(object):
             \n
         """.format(str(fund_code), str(real_time_valuation[0]),
                    str(rt_percent[0]),
-                   str(last_10_days_mean)[0:5], image_url)
+                   str(last_10_days_mean)[0:5], image_url, image_url)
 
     def send(self, mail):
         mail.send_message(self.msg)
