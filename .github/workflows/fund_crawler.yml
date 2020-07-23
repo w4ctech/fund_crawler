@@ -1,0 +1,27 @@
+name: fund_crawler
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: 40 9 * * *
+    - cron: 30 12 * * *
+    - cron: 40 16 * * *
+jobs:
+  fund-emailbot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: "Set up Python"
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: "Install requirements"
+        run: pip install -r requirements.txt
+      - name: "send email"
+        env:
+          emailUser: ${{ secrets.emailUser }}
+          emailPassword: ${{ secrets.emailPassword }}
+        run: python main.py
