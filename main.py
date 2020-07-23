@@ -77,11 +77,24 @@ class Gupiao(object):
 
         # 发送 的内容
         self.msg = self.msg + """
-            <p>基金代码:{}</p>
-            <p>实时净值估值:{}</p>
-            <p>估计增长百分数:{}%</p>
-            <p>近十日净值平均值:{}</p>
-            <p><img src="{}"></p>
+            <table style="border-collapse:collapse;border:1px solid #ddd;text-align:center"> 
+            <tbody>
+                <tr>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">基金代码</th>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">实时净值估值</th>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">估计增长百分数</th>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">近十日净值平均值</th>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">趋势图</th>
+                </tr> 
+                <tr style="border:1px solid #ddd;padding:6px">
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
+                <td style="border:1px solid #ddd;padding:6px"><a target="_top" title="点击查看详情" href="{}"><img src="{}" style="width:88px;height:88px" /></a></td>
+                </tr> 
+            </tbody>
+            </table>
             \n
         """.format(str(fund_code), str(real_time_valuation[0]),
                    str(rt_percent[0]),
