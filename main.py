@@ -59,7 +59,7 @@ class Gupiao(object):
         self.url = "http://stocks.sina.cn/fund/?code={}&vt=4"
         self.msg = ""
 
-    def get_code_info(self, fund_code,fund_title):
+    def get_code_info(self, fund_code, fund_title):
 
         url = "http://fund.eastmoney.com/" + str(fund_code) + ".html"
         response = urllib.request.urlopen(url)
