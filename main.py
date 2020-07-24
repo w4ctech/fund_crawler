@@ -77,28 +77,32 @@ class Gupiao(object):
 
         # 发送 的内容
         self.msg = self.msg + """
-            <table style="border-collapse:collapse;border:1px solid #ddd;text-align:center"> 
+            <table style="border-collapse:collapse;border:1px solid #ddd;text-align:center">
             <tbody>
                 <tr>
                 <th style="border:1px solid #ddd;padding:6px;background-color:#eee">基金代码</th>
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">基金名</th>
                 <th style="border:1px solid #ddd;padding:6px;background-color:#eee">实时净值估值</th>
                 <th style="border:1px solid #ddd;padding:6px;background-color:#eee">估计增长百分数</th>
                 <th style="border:1px solid #ddd;padding:6px;background-color:#eee">近十日净值平均值</th>
                 <th style="border:1px solid #ddd;padding:6px;background-color:#eee">趋势图</th>
-                </tr> 
+                <th style="border:1px solid #ddd;padding:6px;background-color:#eee">100份收益</th>
+                </tr>
                 <tr style="border:1px solid #ddd;padding:6px">
                 <td style="border:1px solid #ddd;padding:6px">{}</td>
                 <td style="border:1px solid #ddd;padding:6px">{}</td>
                 <td style="border:1px solid #ddd;padding:6px">{}</td>
                 <td style="border:1px solid #ddd;padding:6px">{}</td>
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
                 <td style="border:1px solid #ddd;padding:6px"><a target="_top" title="点击查看详情" href="{}"><img src="{}" style="width:88px;height:88px" /></a></td>
-                </tr> 
+                <td style="border:1px solid #ddd;padding:6px">{}</td>
+                </tr>
             </tbody>
             </table>
             \n
-        """.format(str(fund_code), str(real_time_valuation[0]),
+        """.format(str(fund_code),str(fund_title), str(real_time_valuation[0]),
                    str(rt_percent[0]),
-                   str(last_10_days_mean)[0:5], image_url, image_url)
+                   str(last_10_days_mean)[0:5], image_url, image_url,str(rt_percent[0]))
 
     def send(self, mail):
         mail.send_message(self.msg)
@@ -107,18 +111,75 @@ class Gupiao(object):
 def main():
     # 主函数
     b = my_mail()
-    code = [
-        "161722", "161725", "001838", "006712", "005794", "470058", "003291",
-        "003096", "008935", "001668", "162703", "213001", "160629", "001704",
-        "001838"
+    json_str = [
+        {
+            "id": "161722",
+            "text": "招商丰泰混合"
+        },
+        {
+            "id": "161725",
+            "text": "招商中证白酒"
+        },
+        {
+            "id": "001838",
+            "text": "国投瑞银国家安全混合"
+        },
+        {
+            "id": "006712",
+            "text": "前海开源MSCI中国A股消费A"
+        },
+        {
+            "id": "005794",
+            "text": "银华心怡灵活配置混合"
+        },
+        {
+            "id": "470058",
+            "text": "汇添富可转换债券A"
+        },
+        {
+            "id": "003291",
+            "text": "信达澳银健康中国混合"
+        },
+        {
+            "id": "003096",
+            "text": "中欧医疗健康混合C"
+        },
+        {
+            "id": "008935",
+            "text": "大成科技消费股票C"
+        },
+        {
+            "id": "001668",
+            "text": "汇添富全球互联混合"
+        },
+        {
+            "id": "162703",
+            "text": "广发小盘成长混合(LOF)A"
+        },
+        {
+            "id": "213001",
+            "text": "宝盈鸿利收益灵活配置混合A"
+        },
+        {
+            "id": "160629",
+            "text": "鹏华传媒分级"
+        },
+        {
+            "id": "001704",
+            "text": "国投瑞银进宝灵活配置混合"
+        },
+        {
+            "id": "001838",
+            "text": "国投瑞银国家安全混合"
+        }
     ]
     a = Gupiao()
-    for c in code:
+    for c in json_str:
         try:
-            a.get_code_info(c)
-            print("基金代码  " + c + "  爬取成功")
+            a.get_code_info(c['id'],c['text'])
+            print("基金代码  " + c['id'],c['text'] + "  爬取成功")
         except:
-            print("出错代码:{}".format(c))
+            print("出错代码:{}".format(c['id'],c['text']))
     a.send(b)
     b.quit()
 
