@@ -5,9 +5,10 @@ on:
     branches:
       - master
   schedule:
-    - cron: 40 9 * * *
-    - cron: 30 12 * * *
-    - cron: 40 16 * * *
+    # 垃圾UTC时间 cnmd
+    - cron: 40 1 * * *
+    - cron: 30 4 * * *
+    - cron: 40 8 * * *
 jobs:
   fund-emailbot:
     runs-on: ubuntu-latest
